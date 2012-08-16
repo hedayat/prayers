@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="prayers_fa.qm">l10n/prayers_fa.qm</file>
+    </qresource>
+</RCC>

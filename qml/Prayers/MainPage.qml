@@ -41,7 +41,7 @@ Page {
 
             Text {
                 id: fajrTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -55,7 +55,7 @@ Page {
 
             Text {
                 id: sunriseTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -69,7 +69,7 @@ Page {
 
             Text {
                 id: dhuhrTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -83,7 +83,7 @@ Page {
 
             Text {
                 id: asrTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -97,7 +97,7 @@ Page {
 
             Text {
                 id: sunsetTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -111,7 +111,7 @@ Page {
 
             Text {
                 id: maghribTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -125,7 +125,7 @@ Page {
 
             Text {
                 id: ishaTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -139,7 +139,7 @@ Page {
 
             Text {
                 id: midnightTime
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -152,7 +152,7 @@ Page {
 
             Text {
                 id: midnightTime3
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -165,7 +165,7 @@ Page {
 
             Text {
                 id: midnightTime1
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
@@ -178,7 +178,7 @@ Page {
 
             Text {
                 id: midnightTime2
-                text: qsTr("00:00")
+                text: "00:00"
                 font.bold: true
                 font.pixelSize: 24
             }
