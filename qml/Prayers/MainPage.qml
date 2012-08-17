@@ -11,6 +11,8 @@ Page {
         PrayTimes.prayTimes.setMethod('Tehran')
         var date = new Date(); // today
         var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
+//        var test = new Number(4.5);
+//        fajrTime.text = test.toLocaleString()
         fajrTime.text = times.fajr
         sunriseTime.text = times.sunrise
         dhuhrTime.text = times.dhuhr
@@ -21,12 +23,32 @@ Page {
         midnightTime.text = times.midnight
     }
 
+    Column {
+    anchors.fill: parent
+    spacing: 30
+
+    Item {
+        id: titleRec
+        height: titleText.height * 2
+        width: parent.width
+//        opacity: 0
+        Text {
+//            opacity: 100
+            anchors.centerIn: parent
+            id: titleText
+            text: qsTr("NewTitle")
+        }
+    }
+
     Flickable {
         boundsBehavior: Flickable.DragOverBounds
         flickableDirection: Flickable.VerticalFlick
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height - titleRec.height
+//        anchors.fill: parent
         contentHeight: grid1.height
+        clip: true
         Grid {
             id:grid1
             anchors.horizontalCenter: parent.horizontalCenter
@@ -183,5 +205,6 @@ Page {
                 font.pixelSize: 24
             }
         }
+    }
     }
 }

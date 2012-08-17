@@ -17,9 +17,18 @@ PageStackWindow {
         id: commonTools
         visible: true
         ToolIcon {
-            platformIconId: "toolbar-view-menu"
-            anchors.right: (parent === undefined) ? undefined : parent.right
+            iconId: "toolbar-view-menu"
+//            anchors.right: (parent === undefined) ? undefined : parent.right
             onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
+        }
+        ToolIcon {
+            iconId: "toolbar-grid"
+//            platformIconId: "toolbar-grid"
+//            anchors.right: menutool.left
+//            onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
+        }
+        ToolIcon {
+            iconId: "toolbar-list"
         }
     }
 
