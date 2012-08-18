@@ -12,8 +12,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QScopedPointer<QApplication> app(createApplication(argc, argv));
 
     QString locale = QLocale::system().name();
-    QTranslator translator;
 
+    QTranslator translator;
     if (translator.load("prayers_"+locale, ":/"))
         app->installTranslator(&translator);
 

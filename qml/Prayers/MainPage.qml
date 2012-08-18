@@ -13,17 +13,15 @@ Page {
         PrayTimes.prayTimes.setMethod('Tehran')
         var date = new Date(); // today
         var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
-        var test = new Number(4.5);
-//        fajrTime.text = test.toLocaleString()
-        midnightTime2.text = test.toLocaleString()
-        fajrTime.text = times.fajr
-        sunriseTime.text = times.sunrise
-        dhuhrTime.text = times.dhuhr
-        asrTime.text = times.asr
-        sunsetTime.text = times.sunset
-        maghribTime.text = times.maghrib
-        ishaTime.text = times.isha
-        midnightTime.text = times.midnight
+        var base_hack_str = "August 18, 2012 "
+        fajrTime.text = Qt.formatTime(new Date(base_hack_str + times.fajr))
+        sunriseTime.text = Qt.formatTime(new Date(base_hack_str + times.sunrise))
+        dhuhrTime.text = Qt.formatTime(new Date(base_hack_str + times.dhuhr))
+        asrTime.text = Qt.formatTime(new Date(base_hack_str + times.asr))
+        sunsetTime.text = Qt.formatTime(new Date(base_hack_str + times.sunset))
+        maghribTime.text = Qt.formatTime(new Date(base_hack_str + times.maghrib))
+        ishaTime.text = Qt.formatTime(new Date(base_hack_str + times.isha))
+        midnightTime.text = Qt.formatTime(new Date(base_hack_str + times.midnight))
     }
 
     Column {
@@ -35,9 +33,11 @@ Page {
             height: titleText.height * 2
             width: parent.width
             Text {
+                font.bold: true
+                font.pixelSize: 24
                 anchors.centerIn: parent
                 id: titleText
-                text: qsTr("NewTitle")
+                text: Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate)
             }
         }
 
