@@ -4,9 +4,6 @@ import com.nokia.meego 1.0
 PageStackWindow {
     id: appWindow
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
-
     initialPage: mainPage
 
     MainPage {
