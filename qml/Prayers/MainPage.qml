@@ -60,13 +60,10 @@ Page {
             height: parent.height - titleRec.height
             model: timelist
             clip: true
-            cellWidth: 380
+            cellWidth: 375
 
             delegate:
                 Row {
-//                width: parent.width
-//                spacing: 50
-//                anchors.horizontalCenter: parent.horizontalCenter
                 Text {
                     width: timegrid.cellWidth / 2
                     font.bold: true
