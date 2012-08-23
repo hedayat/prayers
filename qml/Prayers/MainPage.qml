@@ -4,7 +4,7 @@ import 'PrayTimes.js' as PrayTimes
 
 Page {
     tools: commonTools
-    anchors.margins: 50
+    anchors.margins: 10
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
@@ -13,6 +13,7 @@ Page {
         PrayTimes.prayTimes.setMethod('Tehran')
         var date = new Date(); // today
         var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
+        timegrid.viewDate = date
         var base_hack_str = "August 18, 2012 "
         timelist.append({"title":qsTr("Fajr"),
                             "time": Qt.formatTime(new Date(base_hack_str + times.fajr))})
@@ -37,6 +38,7 @@ Page {
     }
 
     Column {
+        id: timesCol
         anchors.fill: parent
         spacing: 30
 
@@ -49,34 +51,69 @@ Page {
                 font.pixelSize: 24
                 anchors.centerIn: parent
                 id: titleText
-                text: Qt.formatDate(new Date(), Qt.DefaultLocaleLongDate)
+                text: Qt.formatDate(timegrid.viewDate, Qt.DefaultLocaleLongDate)
             }
         }
 
-        GridView {
-            id: timegrid
-            anchors.horizontalCenter: parent.horizontalCenter
+        Row {
             width: parent.width
             height: parent.height - titleRec.height
-            model: timelist
-            clip: true
-            cellWidth: 375
 
-            delegate:
-                Row {
-                Text {
-                    width: timegrid.cellWidth / 2
-                    font.bold: true
-                    font.pixelSize: 24
-                    text: title
-                    horizontalAlignment: Text.AlignHCenter
+            Rectangle{
+                width: 50
+                height: 50
+                anchors.verticalCenter: parent.verticalCenter
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        var newdate = timegrid.viewDate
+                        newdate.setDate(newdate.getDate()
+                                                  + (Qt.application.layoutDirection === Qt.RightToLeft ? 1 : -1))
+                        timegrid.viewDate = newdate
+                    }
                 }
-                Text {
-                    width: timegrid.cellWidth / 2
-                    font.bold: true
-                    font.pixelSize: 24
-                    text: time
-                    horizontalAlignment: Text.AlignHCenter
+            }
+
+            GridView {
+                id: timegrid
+                width: parent.width - 110
+                height: parent.height - 50
+                model: timelist
+                clip: true
+                cellWidth: 350
+                property date viewDate: "2000-01-01"
+
+                delegate:
+                    Row {
+                    Text {
+                        width: timegrid.cellWidth / 2
+                        font.bold: true
+                        font.pixelSize: 24
+                        text: title
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                    Text {
+                        width: timegrid.cellWidth / 2
+                        font.bold: true
+                        font.pixelSize: 24
+                        text: time
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                }
+            }
+
+            Rectangle{
+                width: 50
+                height: 50
+                anchors.verticalCenter: parent.verticalCenter
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        var newdate = timegrid.viewDate
+                        newdate.setDate(newdate.getDate()
+                                                  + (Qt.application.layoutDirection === Qt.RightToLeft ? -1 : 1))
+                        timegrid.viewDate = newdate
+                    }
                 }
             }
         }
