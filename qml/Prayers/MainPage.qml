@@ -8,6 +8,35 @@ Page {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
+    function updateTimes()
+    {
+        var date = timegrid.viewDate;
+        var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
+        var base_hack_str = "August 18, 2012 "
+        var i=0
+        for (var vaght in times)
+        {
+            if (vaght == "imsak") continue;
+            timelist.setProperty(i++, "time", Qt.formatTime(new Date(base_hack_str + times[vaght])));
+        }
+//        timelist.append({"title":qsTr("Fajr"),
+//                            "time": })
+//        timelist.append({"title":qsTr("Sunrise"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.sunrise))})
+//        timelist.append({"title":qsTr("Dhuhr"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.dhuhr))})
+//        timelist.append({"title":qsTr("Asr"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.asr))})
+//        timelist.append({"title":qsTr("Sunset"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.sunset))})
+//        timelist.append({"title":qsTr("Maghrib"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.maghrib))})
+//        timelist.append({"title":qsTr("Isha"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.isha))})
+//        timelist.append({"title":qsTr("Midnight"),
+//                            "time": Qt.formatTime(new Date(base_hack_str + times.midnight))})
+    }
+
     Component.onCompleted:
     {
         PrayTimes.prayTimes.setMethod('Tehran')
@@ -70,6 +99,7 @@ Page {
                         newdate.setDate(newdate.getDate()
                                                   + (Qt.application.layoutDirection === Qt.RightToLeft ? 1 : -1))
                         timegrid.viewDate = newdate
+                        updateTimes();
                     }
                 }
             }
@@ -113,6 +143,7 @@ Page {
                         newdate.setDate(newdate.getDate()
                                                   + (Qt.application.layoutDirection === Qt.RightToLeft ? -1 : 1))
                         timegrid.viewDate = newdate
+                        updateTimes();
                     }
                 }
             }
