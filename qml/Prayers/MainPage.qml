@@ -16,25 +16,9 @@ Page {
         var i=0
         for (var vaght in times)
         {
-            if (vaght == "imsak") continue;
+            if (vaght === "imsak") continue;
             timelist.setProperty(i++, "time", Qt.formatTime(new Date(base_hack_str + times[vaght])));
         }
-//        timelist.append({"title":qsTr("Fajr"),
-//                            "time": })
-//        timelist.append({"title":qsTr("Sunrise"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.sunrise))})
-//        timelist.append({"title":qsTr("Dhuhr"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.dhuhr))})
-//        timelist.append({"title":qsTr("Asr"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.asr))})
-//        timelist.append({"title":qsTr("Sunset"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.sunset))})
-//        timelist.append({"title":qsTr("Maghrib"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.maghrib))})
-//        timelist.append({"title":qsTr("Isha"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.isha))})
-//        timelist.append({"title":qsTr("Midnight"),
-//                            "time": Qt.formatTime(new Date(base_hack_str + times.midnight))})
     }
 
     Component.onCompleted:
@@ -88,16 +72,32 @@ Page {
             width: parent.width
             height: parent.height - titleRec.height
 
-            Rectangle{
-                width: 50
-                height: 50
+            Item {
+                id: prevButton
+                width: height
+                height: prevButtonImg.height + 10
                 anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    id: prevButtonImg
+                    source: "image://theme/icon-m-common-previous"
+                    anchors.centerIn: parent
+                    mirror: LayoutMirroring.enabled
+                }
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+
+                    onEntered: {
+                        prevButtonImg.source = "image://theme/icon-m-common-previous-selected"
+                    }
+
+                    onExited: {
+                        prevButtonImg.source = "image://theme/icon-m-common-previous"
+                    }
+
                     onClicked: {
                         var newdate = timegrid.viewDate
-                        newdate.setDate(newdate.getDate()
-                                                  + (Qt.application.layoutDirection === Qt.RightToLeft ? 1 : -1))
+                        newdate.setDate(newdate.getDate() - 1)
                         timegrid.viewDate = newdate
                         updateTimes();
                     }
@@ -106,11 +106,11 @@ Page {
 
             GridView {
                 id: timegrid
-                width: parent.width - 110
-                height: parent.height - 50
+                width: parent.width - 2 * prevButton.width
+                height: parent.height - 30
                 model: timelist
                 clip: true
-                cellWidth: 350
+                cellWidth: 370
                 property date viewDate: "2000-01-01"
 
                 delegate:
@@ -132,21 +132,38 @@ Page {
                 }
             }
 
-            Rectangle{
-                width: 50
-                height: 50
+            Item {
+                id: nextButton
+                width: height
+                height: nextButtonImg.height + 10
                 anchors.verticalCenter: parent.verticalCenter
+                Image {
+                    id: nextButtonImg
+                    source: "image://theme/icon-m-common-next"
+                    anchors.centerIn: parent
+                    mirror: LayoutMirroring.enabled
+                }
                 MouseArea {
                     anchors.fill: parent
+                    hoverEnabled: true
+
+                    onEntered: {
+                        nextButtonImg.source = "image://theme/icon-m-common-next-selected"
+                    }
+
+                    onExited: {
+                        nextButtonImg.source = "image://theme/icon-m-common-next"
+                    }
+
                     onClicked: {
                         var newdate = timegrid.viewDate
-                        newdate.setDate(newdate.getDate()
-                                                  + (Qt.application.layoutDirection === Qt.RightToLeft ? -1 : 1))
+                        newdate.setDate(newdate.getDate() + 1)
                         timegrid.viewDate = newdate
                         updateTimes();
                     }
                 }
             }
+
         }
     }
 }
