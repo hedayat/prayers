@@ -72,6 +72,7 @@ Page {
         Row {
             width: parent.width
             height: parent.height - titleRec.height
+            spacing: 10
 
             Image {
                 source: "image://theme/meegotouch-button-background-disabled"
@@ -106,28 +107,42 @@ Page {
 
             GridView {
                 id: timegrid
-                width: parent.width - 2 * prevButton.width
+                width: parent.width - 2 * (prevButton.width + parent.spacing)
                 height: parent.height - 30
                 model: timelist
                 clip: true
-                cellWidth: 350
+                cellWidth: width > 500 ? width / 2 : width
+                cellHeight: 80
                 property date viewDate: "2000-01-01"
 
                 delegate:
+                    Rectangle {
+                    width: timegrid.cellWidth - 10
+                    height: timegrid.cellHeight - 10
+                    radius: 30
+                    smooth: true
+                    border.color: "gray"
+                    border.width: 1
                     Row {
-                    Text {
-                        width: timegrid.cellWidth / 2
-                        font.bold: true
-                        font.pixelSize: 24
-                        text: title
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                    Text {
-                        width: timegrid.cellWidth / 2
-                        font.bold: true
-                        font.pixelSize: 24
-                        text: time
-                        horizontalAlignment: Text.AlignHCenter
+                        anchors.fill: parent
+                        Text {
+                            width: timegrid.cellWidth / 2
+                            font.bold: true
+                            font.pixelSize: 24
+                            text: title
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Text {
+                            width: timegrid.cellWidth / 2
+                            font.bold: true
+                            font.pixelSize: 24
+                            text: time
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
                     }
                 }
             }
