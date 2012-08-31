@@ -23,6 +23,7 @@ Page {
 
     Component.onCompleted:
     {
+        // params: Method, coords: lat.lang.elv
         PrayTimes.prayTimes.setMethod('Tehran')
         var date = new Date(); // today
         var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
@@ -72,14 +73,13 @@ Page {
             width: parent.width
             height: parent.height - titleRec.height
 
-            Item {
+            Image {
+                source: "image://theme/meegotouch-button-background-disabled"
                 id: prevButton
-                width: height
-                height: prevButtonImg.height + 10
                 anchors.verticalCenter: parent.verticalCenter
                 Image {
                     id: prevButtonImg
-                    source: "image://theme/icon-m-common-previous"
+                    source: "image://theme/meegotouch-calendar-datepicker-monthgrid-previousbutton"
                     anchors.centerIn: parent
                     mirror: LayoutMirroring.enabled
                 }
@@ -87,12 +87,12 @@ Page {
                     anchors.fill: parent
                     hoverEnabled: true
 
-                    onEntered: {
-                        prevButtonImg.source = "image://theme/icon-m-common-previous-selected"
+                    onPressed: {
+                        prevButtonImg.source = "image://theme/meegotouch-calendar-datepicker-monthgrid-previousbutton-pressed"
                     }
 
-                    onExited: {
-                        prevButtonImg.source = "image://theme/icon-m-common-previous"
+                    onReleased: {
+                        prevButtonImg.source = "image://theme/meegotouch-calendar-datepicker-monthgrid-previousbutton"
                     }
 
                     onClicked: {
@@ -110,7 +110,7 @@ Page {
                 height: parent.height - 30
                 model: timelist
                 clip: true
-                cellWidth: 370
+                cellWidth: 350
                 property date viewDate: "2000-01-01"
 
                 delegate:
@@ -132,14 +132,13 @@ Page {
                 }
             }
 
-            Item {
+            Image {
                 id: nextButton
-                width: height
-                height: nextButtonImg.height + 10
+                source: "image://theme/meegotouch-button-background-disabled"
                 anchors.verticalCenter: parent.verticalCenter
                 Image {
                     id: nextButtonImg
-                    source: "image://theme/icon-m-common-next"
+                    source: "image://theme/meegotouch-calendar-datepicker-monthgrid-nextbutton"
                     anchors.centerIn: parent
                     mirror: LayoutMirroring.enabled
                 }
@@ -147,12 +146,12 @@ Page {
                     anchors.fill: parent
                     hoverEnabled: true
 
-                    onEntered: {
-                        nextButtonImg.source = "image://theme/icon-m-common-next-selected"
+                    onPressed: {
+                        nextButtonImg.source = "image://theme/meegotouch-calendar-datepicker-monthgrid-nextbutton-pressed"
                     }
 
-                    onExited: {
-                        nextButtonImg.source = "image://theme/icon-m-common-next"
+                    onReleased: {
+                        nextButtonImg.source = "image://theme/meegotouch-calendar-datepicker-monthgrid-nextbutton"
                     }
 
                     onClicked: {
