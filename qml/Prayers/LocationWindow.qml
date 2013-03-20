@@ -87,7 +87,7 @@ Page {
                 id: click_area
                 anchors.fill: parent
                 onPressAndHold: {
-                    console.log("Context menu")
+                    removeMenu.open()
                 }
             }
 
@@ -107,6 +107,19 @@ Page {
                     locationEdit.open()
                 }
             }
+
+            Menu {
+                id: removeMenu
+                visualParent: pageStack
+                MenuLayout {
+                    MenuItem { text: qsTr("Delete")
+                        onClicked: {
+                            locationsList.remove(index)
+                        }
+                    }
+                }
+            }
+
         }
     }
 
@@ -141,4 +154,5 @@ Page {
     LocationEdit {
         id: locationEdit
     }
+
 }

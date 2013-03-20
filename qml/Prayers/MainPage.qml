@@ -238,6 +238,10 @@ Page {
                     pageStack.push(locationWindow)
                 }
             }
+            MenuItem { text: qsTr("About")
+                onClicked: {
+                }
+            }
         }
     }
 
