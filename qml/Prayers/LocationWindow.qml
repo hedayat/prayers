@@ -36,6 +36,15 @@ Page {
         }
     }
 
+    function loadLocation()
+    {
+        var locname = settings.getValue("main/location")
+        var locidx = settings.getIndexOfValueInArray("locations", "title", locname);
+        if (locidx === -1)
+            locidx = 0
+        setLocation(locationsList.get(locidx))
+    }
+
     Component.onCompleted:
     {
 //        locationsList.append({"alphabet": "I", "title": "Isfahan", "subtitle": "",
@@ -45,12 +54,7 @@ Page {
         var locations = settings.getArray("locations")
         for (var i = 0; i < locations.length; i++)
             locationsList.append(locations[i])
-
-        var locname = settings.getValue("main/location")
-        var locidx = settings.getIndexOfValueInArray("locations", "title", locname);
-        if (locidx === -1)
-            locidx = 0
-        setLocation(locationsList.get(locidx))
+        loadLocation()
     }
 
     ListModel {
@@ -127,6 +131,7 @@ Page {
                         onClicked: {
                             settings.removeArrayEntry("locations", index)
                             locationsList.remove(index)
+                            loadLocation()
                         }
                     }
                 }
