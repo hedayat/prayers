@@ -24,6 +24,8 @@ Page {
             console.log("Add new location:  " + locationEdit.location.title)
             locationsList.append(location)
             settings.appendToArray("locations", location)
+            if (locationsList.count == 1)
+                setLocation(location)
         }
         else
         {
@@ -34,6 +36,16 @@ Page {
             locationsList.set(locationEdit.index, location)
             settings.setArrayValue("locations", locationEdit.index, location)
         }
+    }
+
+    function newLocationWindow()
+    {
+        locationEdit.index = locationsList.count
+        locationEdit.location = { "title": "LocationName",
+            "lat": 0.0,
+            "long": 0.0,
+            "elv": 0.0}
+        locationEdit.open();
     }
 
     function loadLocation()
@@ -52,9 +64,14 @@ Page {
 //                                 "elv": 0 })
         settings.sortArray("locations")
         var locations = settings.getArray("locations")
-        for (var i = 0; i < locations.length; i++)
-            locationsList.append(locations[i])
-        loadLocation()
+        if (locations.length)
+        {
+            for (var i = 0; i < locations.length; i++)
+                locationsList.append(locations[i])
+            loadLocation()
+        }
+        else
+            newLocationWindow()
     }
 
     ListModel {
@@ -153,18 +170,11 @@ Page {
         visible: false
         ToolIcon {
             iconId: "toolbar-back";
-            onClicked: { pageStack.pop(); }
+            onClicked: pageStack.pop()
         }
         ToolIcon {
             iconId: "toolbar-add";
-            onClicked: {
-                locationEdit.index = locationsList.count
-                locationEdit.location = { "title": "LocationName",
-                    "lat": 0.0,
-                    "long": 0.0,
-                    "elv": 0.0}
-                locationEdit.open();
-            }
+            onClicked: newLocationWindow()
         }
     }
 
