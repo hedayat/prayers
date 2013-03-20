@@ -3,7 +3,9 @@
 #include <QtCore/QTranslator>
 #include <QtCore/QDebug>
 #include <QtCore/QLibraryInfo>
+#include <QDeclarativeContext>
 #include "qmlapplicationviewer.h"
+#include "setting.h"
 
 
 void myMessageOutput(QtMsgType type, const char *msg)
@@ -44,6 +46,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->installTranslator(&qtTranslator);
 
     QmlApplicationViewer viewer;
+    Settings settings("Prayers", "settings.ini");
+    viewer.rootContext()->setContextProperty("settings", &settings);
+
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/Prayers/main.qml"));
     viewer.showExpanded();

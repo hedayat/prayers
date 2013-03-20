@@ -9,9 +9,7 @@ Page {
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
 
-    property variant currentLocation: {"alphabet": "", "title": "EMPTY", "subtitle": "",
-                                       "lat": 0, "long": 0, "elv": 0 }
-
+    property variant currentLocation: {"title": ""}
     function updateTimes()
     {
         var date = timegrid.viewDate;
@@ -89,7 +87,7 @@ Page {
             id: locationButton
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: ""
+            text: "Isfahan"
             onClicked: {
                 locationWindow.selectionMode = true;
                 pageStack.push(locationWindow)

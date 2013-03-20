@@ -6,7 +6,7 @@
 
 #include <QDesktopServices>
 #include <QCoreApplication>
-//#include <QDebug>
+#include <QDebug>
 
 
 Settings::Settings(QString appName, QString fileName, QObject *parent) : QObject(parent)
@@ -43,16 +43,14 @@ QVariant Settings::getValue( const QString & key, const QVariant & defaultValue)
 // first index=0
 void Settings::removeArrayEntry( const QString & key , int index)
 {
-    QList< QVariantMap > array;
+    QVariantList array;
     array = getArray(key);
     array.removeAt(index);
 
     removeArray(key);
 
-    foreach (QVariantMap entry, array)
-        appendToArray(key, entry);
-    bool b;
-    b=true;
+    foreach (QVariant entry, array)
+        appendToArray(key, entry.toMap());
 }
 
 void Settings::removeArray( const QString & key )
@@ -62,22 +60,30 @@ void Settings::removeArray( const QString & key )
     settings.remove(key);
 }
 
-void Settings::appendToArray( const QString & key, QMap<QString, QVariant> values)
+void Settings::setArrayValue( const QString & key, int index,
+                                const QMap<QString, QVariant> &values)
 {
     QSettings settings(m_confFile, QSettings::IniFormat);
     QMapIterator<QString, QVariant> i(values);
 
-    // get the current size of this array
-    int size = settings.beginReadArray(key);
-    settings.endArray();
-
     settings.beginWriteArray(key);
-    settings.setArrayIndex(size);
+    settings.setArrayIndex(index);
     while (i.hasNext()) {
          i.next();
          settings.setValue(i.key(), i.value() );
      }
      settings.endArray();
+}
+
+void Settings::appendToArray( const QString & key, const QMap<QString, QVariant> &values)
+{
+    QSettings settings(m_confFile, QSettings::IniFormat);
+
+    // get the current size of this array
+    int size = settings.beginReadArray(key);
+    settings.endArray();
+
+    setArrayValue(key, size, values);
 }
 
 
@@ -166,30 +172,27 @@ int Settings::getIndexOfValueInArray( const QString & key, const QString & array
      return -1;
 }
 
-QList< QVariantMap > Settings::getArray( const QString & key)
+QVariantList Settings::getArray(const QString &key)
 {
     QSettings settings(m_confFile, QSettings::IniFormat);
-    QList< QVariantMap > list;
+    QVariantList list;
 
     int size = settings.beginReadArray(key);
 
-     for (int i = 0; i < size; ++i) {
-         settings.setArrayIndex(i);
-         QVariantMap entry;
-         QStringList keys;
-         keys = settings.allKeys();
-         foreach (QString key, keys) {
-             entry.insert( key, settings.value(key) );
-         }
-
-         list.append(entry);
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        QVariantMap entry;
+        QStringList keys;
+        keys = settings.allKeys();
+        foreach (QString key, keys) {
+            entry.insert( key, settings.value(key) );
+        }
+        list.append(entry);
      }
-
      settings.endArray();
+
      return list;
 }
-
-
 
 // https://bugreports.qt-project.org/browse/QTBUG-71
 int Settings::getTimeZone()

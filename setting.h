@@ -26,8 +26,11 @@ public:
 
     Q_INVOKABLE void removeArray( const QString & key);
     Q_INVOKABLE void removeArrayEntry( const QString & key , int index);
-    Q_INVOKABLE void appendToArray( const QString & key, QMap<QString, QVariant> values);
-    Q_INVOKABLE QList< QVariantMap > getArray( const QString & key);
+    Q_INVOKABLE void setArrayValue( const QString & key, int index,
+                                    const QMap<QString, QVariant> &values);
+    Q_INVOKABLE void appendToArray( const QString & key,
+                                    const QMap<QString, QVariant> &values);
+    Q_INVOKABLE QVariantList getArray( const QString & key);
     Q_INVOKABLE QString getArrayJson( const QString & key);
     Q_INVOKABLE QString getArrayXml( const QString & key);
     Q_INVOKABLE bool checkValueArray( const QString & key, const QString & arrayKey , const QString & value);

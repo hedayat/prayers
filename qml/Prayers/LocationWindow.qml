@@ -13,34 +13,43 @@ Page {
 
     function updateLocation()
     {
+        var location = {"alphabet": locationEdit.location.title[0].toUpperCase(),
+            "title": locationEdit.location.title,
+            "subtitle": "",
+            "lat": locationEdit.location.lat,
+            "long": locationEdit.location.long,
+            "elv": locationEdit.location.elv }
         if (locationEdit.index == locationsList.count)
         {
             console.log("Add new location:  " + locationEdit.location.title)
-            locationsList.append({"alphabet": locationEdit.location.title[0].toUpperCase(),
-                                     "title": locationEdit.location.title,
-                                     "subtitle": "",
-                                     "lat": locationEdit.location.lat,
-                                     "long": locationEdit.location.long,
-                                     "elv": locationEdit.location.elv })
+            locationsList.append(location)
+            settings.appendToArray("locations", location)
         }
         else
         {
             console.log("Update existing location: " + locationEdit.location.title)
-            locationsList.set(locationEdit.index, {"alphabet": locationEdit.location.title[0].toUpperCase(),
-                                     "title": locationEdit.location.title,
-                                     "subtitle": "",
-                                     "lat": locationEdit.location.lat,
-                                     "long": locationEdit.location.long,
-                                     "elv": locationEdit.location.elv })
+            var locname = settings.getValue("main/location")
+            if (locationsList.get(locationEdit.index).title === locname)
+                settings.setValue("main/location", location.title)
+            locationsList.set(locationEdit.index, location)
+            settings.setArrayValue("locations", locationEdit.index, location)
         }
     }
 
     Component.onCompleted:
     {
-        locationsList.append({"alphabet": "I", "title": "Isfahan", "subtitle": "",
-                                 "lat": 32.6729, "long": 51.6666,
-                                 "elv": 0 })
-        setLocation(locationsList.get(0))
+//        locationsList.append({"alphabet": "I", "title": "Isfahan", "subtitle": "",
+//                                 "lat": 32.6729, "long": 51.6666,
+//                                 "elv": 0 })
+        var locations = settings.getArray("locations")
+        for (var i = 0; i < locations.length; i++)
+            locationsList.append(locations[i])
+
+        var locname = settings.getValue("main/location")
+        var locidx = settings.getIndexOfValueInArray("locations", "title", locname);
+        if (locidx === -1)
+            locidx = 0
+        setLocation(locationsList.get(locidx))
     }
 
     ListModel {
@@ -94,16 +103,17 @@ Page {
             onClicked: {
                 if (selectionMode)
                 {
+                    settings.setValue("main/location", title);
                     setLocation(model);
                     pageStack.pop();
                 }
                 else
                 {
                     locationEdit.index = index
-                    locationEdit.location = { "title": locationsList.get(index).title,
-                        "lat": locationsList.get(index).lat,
-                        "long": locationsList.get(index).long,
-                        "elv": locationsList.get(index).elv}
+                    locationEdit.location = { "title": title,
+                        "lat": lat,
+                        "long": model.long,
+                        "elv": elv}
                     locationEdit.open()
                 }
             }
@@ -114,6 +124,7 @@ Page {
                 MenuLayout {
                     MenuItem { text: qsTr("Delete")
                         onClicked: {
+                            settings.removeArrayEntry("locations", index)
                             locationsList.remove(index)
                         }
                     }
@@ -154,5 +165,4 @@ Page {
     LocationEdit {
         id: locationEdit
     }
-
 }
