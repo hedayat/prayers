@@ -5,13 +5,18 @@ import 'PrayTimes.js' as PrayTimes
 Page {
     tools: commonTools
     anchors.margins: 10
+
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
+
+    property variant currentLocation: {"alphabet": "", "title": "EMPTY", "subtitle": "",
+                                       "lat": 0, "long": 0, "elv": 0 }
 
     function updateTimes()
     {
         var date = timegrid.viewDate;
-        var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
+        var times = PrayTimes.prayTimes.getTimes(date,
+                        [currentLocation.lat, currentLocation.long, currentLocation.elv])
         var base_hack_str = "August 18, 2012 "
         var i=0
         for (var vaght in times)
@@ -21,12 +26,19 @@ Page {
         }
     }
 
+    function setLocation(location)
+    {
+        currentLocation = location
+        locationButton.text = location.title
+        updateTimes()
+    }
+
     Component.onCompleted:
     {
-        // params: Method, coords: lat.lang.elv
+        // params: Method, coords: lat.long.elv
         PrayTimes.prayTimes.setMethod('Tehran')
         var date = new Date(); // today
-        var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666], 3.5)
+        var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666])
         timegrid.viewDate = date
         var base_hack_str = "August 18, 2012 "
         timelist.append({"title":qsTr("Fajr"),
@@ -54,11 +66,11 @@ Page {
     Column {
         id: timesCol
         anchors.fill: parent
-        spacing: 30
+        spacing: 10
 
         Item {
             id: titleRec
-            height: titleText.height * 2
+            height: titleText.height
             width: parent.width
             Text {
                 font.bold: true
@@ -66,6 +78,21 @@ Page {
                 anchors.centerIn: parent
                 id: titleText
                 text: Qt.formatDate(timegrid.viewDate, Qt.DefaultLocaleLongDate)
+            }
+        }
+
+        LocationWindow {
+            id: locationWindow
+        }
+
+        ToolButton {
+            id: locationButton
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: ""
+            onClicked: {
+                locationWindow.selectionMode = true;
+                pageStack.push(locationWindow)
             }
         }
 
@@ -180,4 +207,38 @@ Page {
 
         }
     }
+
+    ToolBarLayout {
+        id: commonTools
+        visible: true
+        ToolIcon {
+            iconId: "toolbar-view-menu"
+//            anchors.right: (parent === undefined) ? undefined : parent.right
+            onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open()
+                                                               : myMenu.close()
+        }
+//        ToolIcon {
+//            iconId: "toolbar-grid"
+////            platformIconId: "toolbar-grid"
+////            anchors.right: menutool.left
+////            onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
+//        }
+//        ToolIcon {
+//            iconId: "toolbar-list"
+//        }
+    }
+
+    Menu {
+        id: myMenu
+        visualParent: pageStack
+        MenuLayout {
+            MenuItem { text: qsTr("Locations")
+                onClicked: {
+                    locationWindow.selectionMode = false;
+                    pageStack.push(locationWindow)
+                }
+            }
+        }
+    }
+
 }
