@@ -41,6 +41,7 @@ Page {
 //        locationsList.append({"alphabet": "I", "title": "Isfahan", "subtitle": "",
 //                                 "lat": 32.6729, "long": 51.6666,
 //                                 "elv": 0 })
+        settings.sortArray("locations")
         var locations = settings.getArray("locations")
         for (var i = 0; i < locations.length; i++)
             locationsList.append(locations[i])

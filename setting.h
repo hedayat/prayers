@@ -35,6 +35,7 @@ public:
     Q_INVOKABLE QString getArrayXml( const QString & key);
     Q_INVOKABLE bool checkValueArray( const QString & key, const QString & arrayKey , const QString & value);
     Q_INVOKABLE int getIndexOfValueInArray( const QString & key, const QString & arrayKey , const QString & value );
+    Q_INVOKABLE void sortArray(const QString & key);
 
     // Time functions
     Q_INVOKABLE int getTimeZone();

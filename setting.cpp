@@ -194,6 +194,25 @@ QVariantList Settings::getArray(const QString &key)
      return list;
 }
 
+bool locatoinLessThan(const QVariant &s1, const QVariant &s2)
+{
+    QVariantMap s1map = s1.toMap();
+    QVariantMap s2map = s2.toMap();
+    return s1map["title"].toString() < s2map["title"].toString();
+}
+
+void Settings::sortArray(const QString &key)
+{
+    QVariantList array = getArray(key);
+
+    qSort(array.begin(), array.end(), locatoinLessThan);
+
+    removeArray(key);
+
+    foreach (QVariant entry, array)
+        appendToArray(key, entry.toMap());
+}
+
 // https://bugreports.qt-project.org/browse/QTBUG-71
 int Settings::getTimeZone()
 {
