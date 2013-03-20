@@ -42,3 +42,6 @@ RESOURCES += \
 
 HEADERS += \
     setting.h
+
+OTHER_FILES += \
+    Prayers.png

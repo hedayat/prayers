@@ -1,3 +1,20 @@
+/*
+ *  Prayers, islamic prayer time application
+ *  Copyright (C) 2013  Hedayat Vatankhah <gmail email: hedayatv>
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import QtQuick 1.1
 import com.nokia.meego 1.0
 import 'PrayTimes.js' as PrayTimes
@@ -226,6 +243,23 @@ Page {
 //        }
     }
 
+    QueryDialog {
+        id: aboutDialog
+
+        icon: "qrc:///Prayers.png"
+        titleText: qsTr("About Prayers 1.0")
+        message: qsTr("Copyright (C) 2013 <br/><br/>    \
+            <b>Hedayat Vatankhah</b>  <br/><br/>        \
+            License: GNU GPLv3+<br/><br/>               \
+            Thanks to: PrayerTimes <br/>                 \
+            http://praytimes.org<br/><br/>              \
+            This program comes with ABSOLUTELY NO WARRANTY. \
+            This is free software, and you are welcome to redistribute it   \
+            under terms of GNU GPL version 3 (or later). <br/>  \
+                http://www.gnu.org/licenses/")
+        acceptButtonText: "OK"
+    }
+
     Menu {
         id: myMenu
         visualParent: pageStack
@@ -238,6 +272,7 @@ Page {
             }
             MenuItem { text: qsTr("About")
                 onClicked: {
+                    aboutDialog.open()
                 }
             }
         }
