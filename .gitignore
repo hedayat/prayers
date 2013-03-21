@@ -1,3 +1,12 @@
 Makefile
 /Prayers
 *.pro.user
+*.o
+moc_*.cpp
+qrc_Prayers.cpp
+*-stamp
+debian/files
+debian/prayers.aegis
+debian/prayers.debhelper.log
+debian/prayers.substvars
+debian/prayers/
