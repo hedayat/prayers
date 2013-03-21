@@ -1,5 +1,5 @@
 /*
- *  Prayers, islamic prayer time application
+ *  Prayers, Islamic prayer time application
  *  Copyright (C) 2013  Hedayat Vatankhah <gmail email: hedayatv>
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import QtQuick 1.1
+import QtMobility.location 1.1
 import com.nokia.meego 1.0
 
 Sheet {
@@ -108,6 +109,23 @@ Sheet {
                     width: parent.width - parent.children[0].width - 20 - parent.spacing
                 }
             }
+
+            Button {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Current Location"
+                onClicked: positionSource.start()
+            }
+        }
+    }
+
+    PositionSource {
+        id: positionSource
+        active: false
+        onPositionChanged: {
+            locationLat.text = position.coordinate.latitude
+            locationLong.text = position.coordinate.longitude
+            if (position.altitudeValid)
+                locationElv.text = position.coordinate.altitude
         }
     }
 
@@ -122,11 +140,12 @@ Sheet {
     }
 
     onAccepted: {
+        positionSource.stop()
         location = { "title": locationName.text,
             "lat": locationLat.text,
             "long": locationLong.text,
             "elv": locationElv.text }
         updateLocation()
     }
-//    onRejected: console.log("Rejected")
+    onRejected: positionSource.stop()
 }

@@ -1,5 +1,5 @@
 /*
- *  Prayers, islamic prayer time application
+ *  Prayers, Islamic prayer time application
  *  Copyright (C) 2013  Hedayat Vatankhah <gmail email: hedayatv>
  *
  *  This program is free software: you can redistribute it and/or modify
