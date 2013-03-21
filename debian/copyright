@@ -2,25 +2,20 @@ This package was debianized by:
 
     Hedayat Vatankhah <hedayat.fwd@gmail.com> on Tue, 14 Aug 2012 02:49:41 +0430
 
-It was downloaded from:
-
-    <url://example.com or remove>
-
 Upstream Author(s):
 
     Hedayat Vatankhah <hedayat.fwd@gmail.com>
 
 Copyright:
 
-    Copyright (C) 2012 Hedayat Vatankhah
+    Copyright (C) 2013 Hedayat Vatankhah
 
 License:
 
-    <specify license>
+    GPL version 3 or (at your option) any later version
+
 
 The Debian packaging is:
 
-    Copyright C) 2012, Hedayat Vatankhah <hedayat.fwd@gmail.com>
-
-    <specify license of debianized version or remove>
+    Copyright (C) 2013, Hedayat Vatankhah <hedayat.fwd@gmail.com>
 
