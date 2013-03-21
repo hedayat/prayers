@@ -11,17 +11,15 @@ Version: 1.0
 Architecture: any
 Depends: qt-components, ${shlibs:Depends}, ${misc:Depends}
 Description: Islamic Prayer Times Application
-Prayers is an Islamic prayer times application which uses
-<a href=http://praytimes.org>PrayerTimes</a> library which
-provides more accurate results for some methods like Tehran University
-calculation method.
-
+ Prayers is an Islamic prayer times application which uses
+ <a href=http://praytimes.org>PrayerTimes</a> library which
+ provides more accurate results for some methods like Tehran University
+ calculation method.
 XB-Description-fa_FA: برنامه‌ی اوقات شرعی اسلامی
-برنامه‌ی نماز یک برنامه‌ی اوقات شرعی اسلامی است که از کتاب‌خانه‌ی 
-<a href=http://praytimes.org>PrayerTimes</a> 
-استفاده می‌کند که نتایج دقیق‌تری برای برخی از روش‌های محاسبه از جمله
-روش دانشگاه تهران ارائه می‌کند.
-
+ برنامه‌ی نماز یک برنامه‌ی اوقات شرعی اسلامی است که از کتاب‌خانه‌ی 
+ <a href=http://praytimes.org>PrayerTimes</a> 
+ استفاده می‌کند که نتایج دقیق‌تری برای برخی از روش‌های محاسبه از جمله
+ روش دانشگاه تهران ارائه می‌کند.
 XSBC-Maemo-Display-Name: Prayers
 XB-Maemo-Icon-26: 
  iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAKL2lDQ1BJQ0MgcHJvZmlsZQAASMed
