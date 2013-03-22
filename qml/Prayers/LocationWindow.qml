@@ -20,13 +20,9 @@ import com.nokia.extras 1.0
 import com.nokia.meego 1.0
 
 Page {
-    tools: pageTools
-    anchors.margins: 10
-
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
-
     property bool selectionMode: true
+
+    signal addLocation
 
     function updateLocation()
     {
@@ -74,6 +70,12 @@ Page {
         setLocation(locationsList.get(locidx))
     }
 
+    tools: pageTools
+    anchors.margins: 10
+
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
     Component.onCompleted:
     {
 //        locationsList.append({"alphabet": "I", "title": "Isfahan", "subtitle": "",
@@ -87,8 +89,7 @@ Page {
                 locationsList.append(locations[i])
             loadLocation()
         }
-        else
-            newLocationWindow()
+        locationWindow.addLocation.connect(newLocationWindow)
     }
 
     ListModel {
@@ -142,7 +143,6 @@ Page {
             onClicked: {
                 if (selectionMode)
                 {
-                    settings.setValue("main/location", title);
                     setLocation(model);
                     pageStack.pop();
                 }

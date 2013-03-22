@@ -22,17 +22,17 @@ import com.nokia.meego 1.0
 Sheet {
     id: locationSheet
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
-
-    acceptButtonText: qsTr("Save")
-    rejectButtonText: qsTr("Cancel")
-
     property int index: -1
     property variant location: { "title": locationName.text,
                                  "lat": locationLat.text,
                                  "long": locationLong.text,
                                  "elv": locationElv.text }
+
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
+    acceptButtonText: qsTr("Save")
+    rejectButtonText: qsTr("Cancel")
 
     content: Flickable {
         anchors.fill: parent
@@ -120,6 +120,7 @@ Sheet {
 
     PositionSource {
         id: positionSource
+        updateInterval: 5000
         active: false
         onPositionChanged: {
             locationLat.text = position.coordinate.latitude
@@ -130,7 +131,7 @@ Sheet {
     }
 
     onStatusChanged: {
-        if (status === DialogStatus.Opening || status === DialogStatus.Opened)
+        if (status === DialogStatus.Opening)
         {
             locationName.text = location.title
             locationLat.text = location.lat

@@ -20,13 +20,10 @@ import com.nokia.meego 1.0
 import 'PrayTimes.js' as PrayTimes
 
 Page {
-    tools: commonTools
-    anchors.margins: 10
-
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
-
     property variant currentLocation: {"title": ""}
+
+    signal addLocation
+
     function updateTimes()
     {
         var date = timegrid.viewDate;
@@ -44,9 +41,21 @@ Page {
     function setLocation(location)
     {
         currentLocation = location
-        locationButton.text = location.title
-        updateTimes()
+        if (location)
+        {
+            locationButton.text = location.title
+            settings.setValue("main/location", location.title)
+            updateTimes()
+        }
+        else
+            settings.setValue("main/location", "")
     }
+
+    tools: commonTools
+    anchors.margins: 10
+
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
 
     Component.onCompleted:
     {
@@ -72,6 +81,7 @@ Page {
                             "time": Qt.formatTime(new Date(base_hack_str + times.isha))})
         timelist.append({"title":qsTr("Midnight"),
                             "time": Qt.formatTime(new Date(base_hack_str + times.midnight))})
+        mainPage.addLocation.connect(locationWindow.addLocation)
     }
 
     ListModel {
