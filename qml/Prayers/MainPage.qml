@@ -259,7 +259,7 @@ Page {
     QueryDialog {
         id: aboutDialog
 
-        icon: "qrc:///Prayers.png"
+        icon: "/opt/Prayers/icons/Prayers80.png"
         titleText: qsTr("About Prayers 1.0")
         message: qsTr("Copyright (C) 2013 <br/><br/>    \
             <b>Hedayat Vatankhah</b>  <br/><br/>        \

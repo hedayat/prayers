@@ -83,7 +83,7 @@ symbian {
         desktopfile.files = $${TARGET}_harmattan.desktop
         desktopfile.path = /usr/share/applications
         icon.files = $${TARGET}80.png
-        icon.path = /usr/share/icons/hicolor/80x80/apps
+        icon.path = /opt/Prayers/icons/
     } else { # Assumed to be a Desktop Unix
         copyCommand =
         for(deploymentfolder, DEPLOYMENTFOLDERS) {
