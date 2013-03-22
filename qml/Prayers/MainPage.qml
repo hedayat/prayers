@@ -23,6 +23,7 @@ Page {
     property variant currentLocation: {"title": ""}
 
     signal addLocation
+    signal showAbout
 
     function updateTimes()
     {
@@ -56,6 +57,8 @@ Page {
 
     LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
     LayoutMirroring.childrenInherit: true
+
+    onShowAbout: aboutDialog.open()
 
     Component.onCompleted:
     {

@@ -29,6 +29,9 @@ PageStackWindow {
 
     Component.onCompleted: {
         if (!settings.getValue("main/location"))
+        {
             mainPage.addLocation()
+            mainPage.showAbout()
+        }
     }
 }
