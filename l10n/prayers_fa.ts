@@ -2,6 +2,37 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fa_IR">
 <context>
+    <name>CalculationMethodSettings</name>
+    <message>
+        <source>Muslim World League</source>
+        <translation>مجمع جهان اسلامی</translation>
+    </message>
+    <message>
+        <source>Islamic Society of North America (ISNA)</source>
+        <translation>جامعه‌ی اسلامی آمریکای شمالی (ISNA)</translation>
+    </message>
+    <message>
+        <source>Egyptian General Authority of Survey</source>
+        <translation>مرجع عمومی ممیزی مصر</translation>
+    </message>
+    <message>
+        <source>Umm Al-Qura University, Makkah</source>
+        <translation>دانشگاه ام‌القرا مکه</translation>
+    </message>
+    <message>
+        <source>University of Islamic Sciences, Karachi</source>
+        <translation>دانشگاه علوم اسلامی کراچی</translation>
+    </message>
+    <message>
+        <source>University of Tehran</source>
+        <translation>انجمن ژئوفیزیک دانشگاه تهران</translation>
+    </message>
+    <message>
+        <source>Shia Ithna-Ashari, Leva Institute, Qum</source>
+        <translation>موسسه لوای قم (شیعه اثنی‌عشری)</translation>
+    </message>
+</context>
+<context>
     <name>LocationEdit</name>
     <message>
         <source>Save</source>
@@ -84,6 +115,10 @@
     <message>
         <source>Copyright (C) 2013 &lt;br/&gt;&lt;br/&gt;                &lt;b&gt;Hedayat Vatankhah&lt;/b&gt;  &lt;br/&gt;&lt;br/&gt;                    License: GNU GPLv3+&lt;br/&gt;&lt;br/&gt;                           Thanks to: PrayerTimes &lt;br/&gt;                             http://praytimes.org&lt;br/&gt;&lt;br/&gt;                          This program comes with ABSOLUTELY NO WARRANTY.             This is free software, and you are welcome to redistribute it               under terms of GNU GPL version 3 (or later). &lt;br/&gt;                  http://www.gnu.org/licenses/</source>
         <translation>کپی‌رایت (C&amp;rlm;) ۲۰۱۳ &lt;br/&gt;&lt;br/&gt;            &lt;b&gt;هدایت وطن‌خواه&lt;/b&gt;  &lt;br/&gt;&lt;br/&gt;            گواهی: GNU GPLv3+ &amp;lrm;&lt;br/&gt;&lt;br/&gt;            با تشکر: PrayerTimes &lt;br/&gt;            http://praytimes.org&lt;br/&gt;&lt;br/&gt;            این برنامه بدون هیچ‌گونه ضمانتی ارائه می‌شود.            این نرم‌افزار آزاد است، و شما می‌توانید آن را تحت قوانین مجوز GNU GPL نسخه‌ی ۳ (یا بیشتر) توزیع کنید.&lt;br/&gt;                http://www.gnu.org/licenses/ &amp;lrm;</translation>
+    </message>
+    <message>
+        <source>Calculation Method</source>
+        <translation>روش محاسبه</translation>
     </message>
 </context>
 <context>
