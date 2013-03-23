@@ -63,7 +63,10 @@ Page {
     Component.onCompleted:
     {
         // params: Method, coords: lat.long.elv
-        PrayTimes.prayTimes.setMethod('Tehran')
+        var method = settings.getValue("main/calculation_method")
+        if (!method)
+            method = "Tehran"
+        PrayTimes.prayTimes.setMethod(method)
         var date = new Date(); // today
         var times = PrayTimes.prayTimes.getTimes(date, [32.6729, 51.6666])
         timegrid.viewDate = date
@@ -273,6 +276,14 @@ Page {
         acceptButtonText: "OK"
     }
 
+    CalculationMethodSettings {
+        id: calculationMethodWindow
+        onMethodChanged: {
+            PrayTimes.prayTimes.setMethod(method)
+            updateTimes()
+        }
+    }
+
     Menu {
         id: myMenu
         visualParent: pageStack
@@ -281,6 +292,11 @@ Page {
                 onClicked: {
                     locationWindow.selectionMode = false;
                     pageStack.push(locationWindow)
+                }
+            }
+            MenuItem { text: qsTr("Calculation Method")
+                onClicked: {
+                    pageStack.push(calculationMethodWindow)
                 }
             }
             MenuItem { text: qsTr("About")
