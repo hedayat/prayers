@@ -24,7 +24,7 @@ CONFIG += mobility
 MOBILITY += location
 
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
-# CONFIG += qdeclarative-boostable
+CONFIG += qdeclarative-boostable
 
 # Add dependency to Symbian components
 # CONFIG += qt-components
@@ -45,3 +45,10 @@ HEADERS += \
 
 OTHER_FILES += \
     Prayers.png
+
+splash.files = splash.jpeg splash-l.jpeg
+splash.path = /opt/Prayers/
+export(splash.files)
+export(splash.path)
+INSTALLS += splash
+
